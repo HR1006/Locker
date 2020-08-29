@@ -28,4 +28,12 @@ public class LockerTest {
         assertEquals(Locker.BAG, depositBagResult);
     }
 
+    @Test
+    public void should_return_prompt_when_pick_up_bag_given_invalid_ticket() {
+        Locker locker = new Locker();
+        String ticket = Locker.INVALID_TICKET;
+        String depositBagResult = locker.pickUpBag(ticket);
+        assertEquals(Locker.PICK_UP_BAG_FAILED, depositBagResult);
+    }
+
 }
