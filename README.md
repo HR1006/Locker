@@ -19,3 +19,10 @@
 6. 存包的位置是随机，没有顺序
 7. 不要脑补需求，及时和PO确认
 8. 不考虑并发
+
+### tasking
+- Given: 一个有空位置的储物柜 When: 存包 Then: 返回一张小票
+- Given: 一个无空位置的储物柜 When: 存包 Then: 提示储物柜已满
+- Given: 一张有效小票 When: 取包 Then: 储物柜返回一个包
+- Given: 一张无效小票 When: 取包 Then: 提示票据无效
+- Given: 一张已取过包的有效小票 When: 取包， Then: 提示票据无效
