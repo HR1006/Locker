@@ -20,4 +20,12 @@ public class LockerTest {
         assertEquals(Locker.DEPOSIT_BAG_TICKET, depositBagResult);
     }
 
+    @Test
+    public void should_return_bag_when_pick_up_bag_given_valid_ticket() {
+        Locker locker = new Locker();
+        String ticket = Locker.VALID_TICKET;
+        String depositBagResult = locker.pickUpBag(ticket);
+        assertEquals(Locker.BAG, depositBagResult);
+    }
+
 }
