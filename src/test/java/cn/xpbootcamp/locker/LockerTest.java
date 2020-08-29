@@ -24,16 +24,24 @@ public class LockerTest {
     public void should_return_bag_when_pick_up_bag_given_valid_ticket() {
         Locker locker = new Locker();
         String ticket = Locker.VALID_TICKET;
-        String depositBagResult = locker.pickUpBag(ticket);
-        assertEquals(Locker.BAG, depositBagResult);
+        String pickUpBagResult = locker.pickUpBag(ticket);
+        assertEquals(Locker.BAG, pickUpBagResult);
     }
 
     @Test
     public void should_return_prompt_when_pick_up_bag_given_invalid_ticket() {
         Locker locker = new Locker();
         String ticket = Locker.INVALID_TICKET;
-        String depositBagResult = locker.pickUpBag(ticket);
-        assertEquals(Locker.PICK_UP_BAG_FAILED, depositBagResult);
+        String pickUpBagResult = locker.pickUpBag(ticket);
+        assertEquals(Locker.PICK_UP_BAG_FAILED, pickUpBagResult);
+    }
+
+    @Test
+    public void should_return_prompt_when_pick_up_bag_given_valid_ticket_but_has_been_used() {
+        Locker locker = new Locker();
+        String ticket = Locker.VALID_TICKET_HAS_BEEN_USED;
+        String pickUpBagResult = locker.pickUpBag(ticket);
+        assertEquals(Locker.PICK_UP_BAG_FAILED, pickUpBagResult);
     }
 
 }
