@@ -29,4 +29,18 @@ public class PrimaryLockerRobotTest {
         assertEquals(ticket.getLocker(), locker2);
     }
 
+    @Test
+    public void should_return_ticket_when_deposit_bag_given_locker1_is_bot_full_and_locker2_is_not_full() {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker();
+        locker1.setLockerVolume(1);
+        robot.addLocker(locker1);
+        Locker locker2 = new Locker();
+        locker1.setLockerVolume(1);
+        robot.addLocker(locker2);
+        Bag bag = new Bag();
+        Ticket ticket = robot.depositBag(bag);
+        assertEquals(ticket.getLocker(), locker1);
+    }
+
 }
