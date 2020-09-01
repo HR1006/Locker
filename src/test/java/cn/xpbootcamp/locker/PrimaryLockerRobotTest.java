@@ -43,4 +43,18 @@ public class PrimaryLockerRobotTest {
         assertEquals(ticket.getLocker(), locker1);
     }
 
+    @Test
+    public void should_return_bag_when_pick_up_bag_while_ticket_is_valid_and_deposit_bag_in_locker1() {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker();
+        locker1.setLockerVolume(1);
+        robot.addLocker(locker1);
+        Locker locker2 = new Locker();
+        locker1.setLockerVolume(1);
+        robot.addLocker(locker2);
+        Bag bag = new Bag();
+        Ticket ticket = robot.depositBag(bag);
+        assertNotNull(robot.pickUpBag(ticket));
+    }
+
 }

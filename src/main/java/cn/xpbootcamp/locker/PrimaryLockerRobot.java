@@ -26,4 +26,8 @@ public class PrimaryLockerRobot {
         return ticket;
     }
 
+    public Bag pickUpBag(Ticket ticket) {
+        Locker locker = ticket.getLocker();
+        return locker.pickUpBag(ticket);
+    }
 }
