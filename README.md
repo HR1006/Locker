@@ -21,8 +21,8 @@
 8. 不考虑并发
 
 ### tasking
-- Given: 一个有空位置的储物柜 When: 存包 Then: 返回一张小票
-- Given: 一个无空位置的储物柜 When: 存包 Then: 提示储物柜已满
-- Given: 一张有效小票 When: 取包 Then: 储物柜返回一个包
-- Given: 一张无效小票 When: 取包 Then: 提示票据无效
-- Given: 一张已取过包的有效小票 When: 取包， Then: 提示票据无效
+- Given: 一个有空位置的储物柜 When: locker存包 Then: 存包成功，返回票据
+- Given: 一个无空位置的储物柜 When: locker存包 Then: 存包失败，提示储物柜已满
+- Given: 一张有效小票 When: locker取包 Then: 取包成功
+- Given: 一张伪造票据 When: locker取包 Then: 取包失败，提示非法票据
+- Given: 一张重复使用的票据 When: locker取包， Then: 取包失败，提示非法票据
