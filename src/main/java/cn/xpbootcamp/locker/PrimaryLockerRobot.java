@@ -28,6 +28,9 @@ public class PrimaryLockerRobot {
 
     public Bag pickUpBag(Ticket ticket) {
         Locker locker = ticket.getLocker();
+        if (locker == null) {
+            throw new InvalidTicketException(InvalidTicketException.PICK_UP_BAG_FAILED);
+        }
         return locker.pickUpBag(ticket);
     }
 }

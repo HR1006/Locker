@@ -44,7 +44,7 @@ public class PrimaryLockerRobotTest {
     }
 
     @Test
-    public void should_return_bag_when_pick_up_bag_while_ticket_is_valid_and_deposit_bag_in_locker1() {
+    public void should_return_bag_when_pick_up_bag_given_ticket_is_valid_and_deposit_bag_in_locker1() {
         PrimaryLockerRobot robot = new PrimaryLockerRobot();
         Locker locker1 = new Locker();
         locker1.setLockerVolume(1);
@@ -58,7 +58,7 @@ public class PrimaryLockerRobotTest {
     }
 
     @Test
-    public void should_return_bag_when_pick_up_bag_while_ticket_is_valid_and_deposit_bag_in_locker2() {
+    public void should_return_bag_when_pick_up_bag_given_ticket_is_valid_and_deposit_bag_in_locker2() {
         PrimaryLockerRobot robot = new PrimaryLockerRobot();
         Locker locker1 = new Locker();
         locker1.setLockerVolume(0);
@@ -69,6 +69,18 @@ public class PrimaryLockerRobotTest {
         Bag bag = new Bag();
         Ticket ticket = robot.depositBag(bag);
         assertNotNull(robot.pickUpBag(ticket));
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_return_prompt_when_pick_up_bag_given_invalid_ticket() {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker();
+        locker1.setLockerVolume(1);
+        robot.addLocker(locker1);
+        Bag bag = new Bag();
+        robot.depositBag(bag);
+        Ticket ticket = new Ticket();
+        robot.pickUpBag(ticket);
     }
 
 }
