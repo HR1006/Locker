@@ -2,46 +2,55 @@ package cn.xpbootcamp.locker;
 
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LockerTest {
 
-    @Test
-    public void should_return_prompt_when_deposit_bag_given_locker_is_empty() {
-        Locker locker = new Locker(0);
-        String depositBagResult = locker.depositBag();
-        assertEquals(Locker.DEPOSIT_BAG_FAILED, depositBagResult);
+    @Test(expected = LockerFullException.class)
+    public void should_return_prompt_when_deposit_bag_given_locker_is_full() {
+        Locker locker = new Locker();
+        locker.setLockerVolume(0);
+        Bag bag = new Bag();
+        locker.depositBag(bag);
     }
 
     @Test
-    public void should_return_ticket_when_deposit_bag_given_locker_is_not_empty() {
-        Locker locker = new Locker(1);
-        String depositBagResult = locker.depositBag();
-        assertEquals(Locker.DEPOSIT_BAG_TICKET, depositBagResult);
+    public void should_return_ticket_when_deposit_bag_given_locker_is_not_full() {
+        Locker locker = new Locker();
+        locker.setLockerVolume(1);
+        Bag bag = new Bag();
+        Ticket ticket = locker.depositBag(bag);
+        assertNotNull(ticket);
     }
 
     @Test
     public void should_return_bag_when_pick_up_bag_given_valid_ticket() {
         Locker locker = new Locker();
-        String ticket = Locker.VALID_TICKET;
-        String pickUpBagResult = locker.pickUpBag(ticket);
-        assertEquals(Locker.BAG, pickUpBagResult);
+        locker.setLockerVolume(1);
+        Bag bag = new Bag();
+        Ticket ticket = locker.depositBag(bag);
+        bag = locker.pickUpBag(ticket);
+        assertNotNull(bag);
     }
 
-    @Test
+    @Test(expected = InvalidTicketException.class)
     public void should_return_prompt_when_pick_up_bag_given_invalid_ticket() {
         Locker locker = new Locker();
-        String ticket = Locker.INVALID_TICKET;
-        String pickUpBagResult = locker.pickUpBag(ticket);
-        assertEquals(Locker.PICK_UP_BAG_FAILED, pickUpBagResult);
+        locker.setLockerVolume(1);
+        Bag bag = new Bag();
+        locker.depositBag(bag);
+        Ticket invalidTicket = new Ticket();
+        locker.pickUpBag(invalidTicket);
     }
 
-    @Test
+    @Test(expected = InvalidTicketException.class)
     public void should_return_prompt_when_pick_up_bag_given_valid_ticket_but_has_been_used() {
         Locker locker = new Locker();
-        String ticket = Locker.VALID_TICKET_HAS_BEEN_USED;
-        String pickUpBagResult = locker.pickUpBag(ticket);
-        assertEquals(Locker.PICK_UP_BAG_FAILED, pickUpBagResult);
+        locker.setLockerVolume(1);
+        Bag bag = new Bag();
+        Ticket validTicket = locker.depositBag(bag);
+        locker.pickUpBag(validTicket);
+        locker.pickUpBag(validTicket);
     }
 
 }
