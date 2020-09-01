@@ -83,4 +83,16 @@ public class PrimaryLockerRobotTest {
         robot.pickUpBag(ticket);
     }
 
+    @Test(expected = InvalidTicketException.class)
+    public void should_return_prompt_when_pick_up_bag_given_valid_ticket_but_has_been_used() {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker();
+        locker1.setLockerVolume(1);
+        robot.addLocker(locker1);
+        Bag bag = new Bag();
+        Ticket ticket = robot.depositBag(bag);
+        robot.pickUpBag(ticket);
+        robot.pickUpBag(ticket);
+    }
+
 }
