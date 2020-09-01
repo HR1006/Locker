@@ -1,6 +1,7 @@
 package cn.xpbootcamp.locker;
 
 import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PrimaryLockerRobotTest {
 
@@ -12,6 +13,20 @@ public class PrimaryLockerRobotTest {
         robot.addLocker(locker);
         Bag bag = new Bag();
         robot.depositBag(bag);
+    }
+
+    @Test
+    public void should_return_ticket_when_deposit_bag_given_locker1_is_full_and_locker2_is_not_full() {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker();
+        locker1.setLockerVolume(0);
+        robot.addLocker(locker1);
+        Locker locker2 = new Locker();
+        locker2.setLockerVolume(1);
+        robot.addLocker(locker2);
+        Bag bag = new Bag();
+        Ticket ticket = robot.depositBag(bag);
+        assertEquals(ticket.getLocker(), locker2);
     }
 
 }

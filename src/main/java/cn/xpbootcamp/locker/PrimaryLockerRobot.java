@@ -16,6 +16,7 @@ public class PrimaryLockerRobot {
         for (Locker locker : lockers) {
             if (locker.surplusCapacity() > 0) {
                 ticket = locker.depositBag(bag);
+                ticket.setLocker(locker);
                 break;
             }
         }
