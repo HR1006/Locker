@@ -3,10 +3,10 @@ package cn.xpbootcamp.locker;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Locker {
-    public static final String DEPOSIT_BAG_FAILED = "存包失败，储物柜已满！";
-    public static final String PICK_UP_BAG_FAILED = "取包失败，非法票据！";
+import static cn.xpbootcamp.locker.InvalidTicketException.PICK_UP_BAG_FAILED;
+import static cn.xpbootcamp.locker.LockerFullException.DEPOSIT_BAG_FAILED;
 
+public class Locker {
     private int lockerVolume;
     private final Map<Ticket, Bag> mapping = new HashMap<>();
 
@@ -21,7 +21,7 @@ public class Locker {
         this.lockerVolume = lockerVolume;
     }
 
-    private int surplusCapacity() {
+    public int surplusCapacity() {
         return lockerVolume -  mapping.size();
     }
 
