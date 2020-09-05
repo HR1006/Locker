@@ -62,4 +62,15 @@ public class SmartLockerRobotTest {
         assertEquals(robot.pickUpBag(ticket), bag);
     }
 
+    @Test(expected = InvalidTicketException.class)
+    public void should_return_prompt_when_pick_up_bag_given_invalid_ticket() {
+        SmartLockerRobot robot = new SmartLockerRobot();
+        Locker locker1 = new Locker(1);
+        robot.addLocker(locker1);
+        Bag bag = new Bag();
+        robot.depositBag(bag);
+        Ticket ticket = new Ticket();
+        robot.pickUpBag(ticket);
+    }
+
 }
