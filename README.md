@@ -35,3 +35,11 @@
 - Given: 一张有效小票，包存在第二个储物柜 When: PrimaryLockerRobot取包 Then: 取包成功
 - Given: 一张伪造票据 When: PrimaryLockerRobot取包 Then: 取包失败，提示非法票据
 - Given: 一张重复使用的票据 When: PrimaryLockerRobot取包， Then: 取包失败，提示非法票据
+
+### SmartLockerRobot tasking
+- Given: SmartLockerRobot管理一个Locker且已经存满 When: SmartLockerRobot存包 Then: 存包失败，提示储物柜已满
+- Given: SmartLockerRobot管理两个Locker，第一个剩余容量为2，第二个剩余容量为1 When: SmartLockerRobot存包 Then: 成功存包到第一个Locker，返回票据
+- Given: SmartLockerRobot管理两个Locker，第一个剩余容量为1，第二个剩余容量为2 When: SmartLockerRobot存包 Then: 成功存包到第二个Locker，返回票据
+- Given: SmartLockerRobot管理两个Locker，第一个剩余容量为1，第二个剩余容量为1 When: SmartLockerRobot存包 Then: 成功存包到第一个Locker，返回票据
+- Given: 一张有效票据 When: SmartLockerRobot取包 Then: 取包成功
+- Given: 一张无效票据 When: SmartLockerRobot取包 Then: 取包失败，提示非法票据
