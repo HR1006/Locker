@@ -1,6 +1,7 @@
 package cn.xpbootcamp.locker;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,10 @@ public class SmartLockerRobot {
         if(notFullLockers.size() == 0) {
             throw new LockerFullException();
         }
-        return notFullLockers.get(0).depositBag(bag);
+        return notFullLockers
+                .stream()
+                .max(Comparator.comparingInt(Locker::surplusCapacity))
+                .get()
+                .depositBag(bag);
     }
 }
