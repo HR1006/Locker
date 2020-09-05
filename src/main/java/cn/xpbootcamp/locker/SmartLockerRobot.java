@@ -15,14 +15,14 @@ public class SmartLockerRobot {
     public Ticket depositBag(Bag bag) {
         List<Locker> notFullLockers = lockers
                 .stream()
-                .filter(locker -> locker.surplusCapacity() > 0)
+                .filter(locker -> locker.freeCapacity() > 0)
                 .collect(Collectors.toList());
         if(notFullLockers.size() == 0) {
             throw new LockerFullException();
         }
         return notFullLockers
                 .stream()
-                .max(Comparator.comparingInt(Locker::surplusCapacity))
+                .max(Comparator.comparingInt(Locker::freeCapacity))
                 .get()
                 .depositBag(bag);
     }

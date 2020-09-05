@@ -14,7 +14,7 @@ public class PrimaryLockerRobot {
     public Ticket depositBag(Bag bag) {
         Ticket ticket = null;
         for (Locker locker : lockers) {
-            if (locker.surplusCapacity() > 0) {
+            if (locker.freeCapacity() > 0) {
                 ticket = locker.depositBag(bag);
                 break;
             }
