@@ -3,32 +3,26 @@ package cn.xpbootcamp.locker;
 import java.util.HashMap;
 import java.util.Map;
 
-import static cn.xpbootcamp.locker.InvalidTicketException.PICK_UP_BAG_FAILED;
-import static cn.xpbootcamp.locker.LockerFullException.DEPOSIT_BAG_FAILED;
-
 public class Locker {
-    private int lockerVolume;
+    private int lockerCapacity;
     private final Map<Ticket, Bag> mapping = new HashMap<>();
 
-    Locker() {
+    Locker(int lockerCapacity) {
+        this.lockerCapacity = lockerCapacity;
     }
 
-    public int getLockerVolume() {
-        return lockerVolume;
-    }
-
-    public void setLockerVolume(int lockerVolume) {
-        this.lockerVolume = lockerVolume;
+    public boolean isValidTicket(Ticket ticket) {
+        return mapping.containsKey(ticket);
     }
 
     public int surplusCapacity() {
-        return lockerVolume -  mapping.size();
+        return lockerCapacity -  mapping.size();
     }
 
     public Ticket depositBag(Bag bag) {
         Ticket ticket = null;
         if (surplusCapacity() == 0) {
-            throw new LockerFullException(PICK_UP_BAG_FAILED);
+            throw new LockerFullException();
         } else {
             ticket = new Ticket();
             mapping.put(ticket, bag);
@@ -39,7 +33,7 @@ public class Locker {
     public Bag pickUpBag(Ticket ticket) {
         Bag bag = mapping.remove(ticket);;
         if (bag == null) {
-            throw new InvalidTicketException(DEPOSIT_BAG_FAILED);
+            throw new InvalidTicketException();
         }
         return bag;
     }

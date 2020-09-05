@@ -16,21 +16,21 @@ public class PrimaryLockerRobot {
         for (Locker locker : lockers) {
             if (locker.surplusCapacity() > 0) {
                 ticket = locker.depositBag(bag);
-                ticket.setLocker(locker);
                 break;
             }
         }
         if (ticket == null) {
-            throw new LockerFullException(LockerFullException.DEPOSIT_BAG_FAILED);
+            throw new LockerFullException();
         }
         return ticket;
     }
 
     public Bag pickUpBag(Ticket ticket) {
-        Locker locker = ticket.getLocker();
-        if (locker == null) {
-            throw new InvalidTicketException(InvalidTicketException.PICK_UP_BAG_FAILED);
+        for (Locker locker : lockers) {
+            if (locker.isValidTicket(ticket)) {
+                return locker.pickUpBag(ticket);
+            }
         }
-        return locker.pickUpBag(ticket);
+        throw new InvalidTicketException();
     }
 }
