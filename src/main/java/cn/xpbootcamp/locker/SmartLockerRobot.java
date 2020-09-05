@@ -26,4 +26,13 @@ public class SmartLockerRobot {
                 .get()
                 .depositBag(bag);
     }
+
+    public Bag pickUpBag(Ticket ticket) {
+        for (Locker locker : lockers) {
+            if (locker.isValidTicket(ticket)) {
+                return locker.pickUpBag(ticket);
+            }
+        }
+        throw new InvalidTicketException();
+    }
 }

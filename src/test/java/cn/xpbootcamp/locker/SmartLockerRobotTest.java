@@ -52,4 +52,14 @@ public class SmartLockerRobotTest {
         assertEquals(locker1.pickUpBag(ticket), bag);
     }
 
+    @Test
+    public void should_return_bag_when_pick_up_bag_given_ticket_is_valid() {
+        SmartLockerRobot robot = new SmartLockerRobot();
+        Locker locker = new Locker(1);
+        robot.addLocker(locker);
+        Bag bag = new Bag();
+        Ticket ticket = robot.depositBag(bag);
+        assertEquals(robot.pickUpBag(ticket), bag);
+    }
+
 }
