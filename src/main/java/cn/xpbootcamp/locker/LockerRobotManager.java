@@ -52,4 +52,13 @@ public class LockerRobotManager {
         }
         throw new LockerFullException();
     }
+
+    public Bag pickUpBag(Ticket ticket) {
+        for (Robot robot : getRobotsByType(PrimaryLockerRobot.class)) {
+            if (robot.isValidTicket(ticket)) {
+                return robot.pickUpBag(ticket);
+            }
+        }
+        throw new InvalidTicketException();
+    }
 }

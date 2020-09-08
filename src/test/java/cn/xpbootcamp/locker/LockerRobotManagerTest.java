@@ -70,4 +70,11 @@ public class LockerRobotManagerTest {
         lockerRobotManager.depositBag(new Bag());
     }
 
+    @Test
+    public void should_return_bag_when_pick_up_bag_given_one_primary_locker_robot_ticket() {
+        Bag bag = new Bag();
+        Ticket ticket = primaryLockerRobot.depositBag(bag);
+        assertEquals(lockerRobotManager.pickUpBag(ticket), bag);
+    }
+
 }
