@@ -16,31 +16,40 @@ public class LockerRobotManager {
         lockers.add(locker);
     }
 
-    public Ticket depositBag(Bag bag) {
+    public Ticket depositBagByRobotType(Class<? extends Robot> clazz, Bag bag) {
         Ticket ticket = null;
-        List<Robot> primaryLockerRobots = robots
-                .stream()
-                .filter(robot -> robot instanceof PrimaryLockerRobot)
-                .collect(Collectors.toList());
-        for (Robot robot : primaryLockerRobots) {
+        for (Robot robot : getRobotsByType(clazz)) {
             ticket = robot.depositBagOrNot(bag);
             if (ticket != null) {
-                return ticket;
+                break;
             }
-        }
-        List<Robot> smartLockerRobots = robots
-                .stream()
-                .filter(robot -> robot instanceof SmartLockerRobot)
-                .collect(Collectors.toList());
-        for (Robot robot : smartLockerRobots) {
-            ticket = robot.depositBagOrNot(bag);
-            if (ticket != null) {
-                return ticket;
-            }
-        }
-        if (ticket == null) {
-            throw new LockerFullException();
         }
         return ticket;
+    }
+
+    public List<Robot> getRobotsByType(Class<? extends Robot> clazz) {
+        return robots
+                .stream()
+                .filter(clazz::isInstance)
+                .collect(Collectors.toList());
+    }
+
+    public Ticket depositBag(Bag bag) {
+        Ticket ticket;
+        ticket = depositBagByRobotType(PrimaryLockerRobot.class, bag);
+        if (ticket != null) {
+            return ticket;
+        }
+        ticket = depositBagByRobotType(SmartLockerRobot.class, bag);
+        if (ticket != null) {
+            return ticket;
+        }
+        for (Locker locker : lockers) {
+            if (locker.freeCapacity() > 0) {
+                ticket = locker.depositBag(bag);
+                return ticket;
+            }
+        }
+        throw new LockerFullException();
     }
 }
