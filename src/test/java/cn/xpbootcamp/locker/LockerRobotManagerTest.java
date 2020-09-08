@@ -51,4 +51,14 @@ public class LockerRobotManagerTest {
         assertEquals(locker1.pickUpBag(ticket), bag);
     }
 
+    @Test
+    public void should_return_ticket_when_deposit_bag_given_one_full_primary_locker_robot_and_one_full_smart_locker_robot_and_one_full_locker_and_one_not_full_locker() {
+        primaryLockerRobot.depositBag(new Bag());
+        smartLockerRobot.depositBag(new Bag());
+        locker1.depositBag(new Bag());
+        Bag bag = new Bag();
+        Ticket ticket = lockerRobotManager.depositBag(bag);
+        assertEquals(locker2.pickUpBag(ticket), bag);
+    }
+
 }
