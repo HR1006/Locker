@@ -24,4 +24,6 @@ public abstract class Robot {
         }
         throw new InvalidTicketException();
     }
+
+    public abstract Ticket depositBagOrNot(Bag bag);
 }

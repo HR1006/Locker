@@ -18,15 +18,24 @@ public class LockerRobotManager {
 
     public Ticket depositBag(Bag bag) {
         Ticket ticket = null;
-        List<PrimaryLockerRobot> primaryLockerRobots = robots
+        List<Robot> primaryLockerRobots = robots
                 .stream()
                 .filter(robot -> robot instanceof PrimaryLockerRobot)
-                .map(robot -> (PrimaryLockerRobot) robot)
                 .collect(Collectors.toList());
-        for (PrimaryLockerRobot primaryLockerRobot : primaryLockerRobots) {
-            ticket = primaryLockerRobot.depositBagOrNot(bag);
+        for (Robot robot : primaryLockerRobots) {
+            ticket = robot.depositBagOrNot(bag);
             if (ticket != null) {
-                break;
+                return ticket;
+            }
+        }
+        List<Robot> smartLockerRobots = robots
+                .stream()
+                .filter(robot -> robot instanceof SmartLockerRobot)
+                .collect(Collectors.toList());
+        for (Robot robot : smartLockerRobots) {
+            ticket = robot.depositBagOrNot(bag);
+            if (ticket != null) {
+                return ticket;
             }
         }
         if (ticket == null) {

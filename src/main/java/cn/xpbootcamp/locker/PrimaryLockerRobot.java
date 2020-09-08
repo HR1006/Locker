@@ -1,6 +1,7 @@
 package cn.xpbootcamp.locker;
 
 public class PrimaryLockerRobot extends Robot {
+    @Override
     public Ticket depositBagOrNot(Bag bag) {
         Ticket ticket = null;
         for (Locker locker : getLockers()) {
@@ -12,6 +13,7 @@ public class PrimaryLockerRobot extends Robot {
         return ticket;
     }
 
+    @Override
     public Ticket depositBag(Bag bag) {
         Ticket ticket = depositBagOrNot(bag);
         if (ticket == null) {
