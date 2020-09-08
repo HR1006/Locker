@@ -53,10 +53,29 @@ public class LockerRobotManager {
         throw new LockerFullException();
     }
 
-    public Bag pickUpBag(Ticket ticket) {
-        for (Robot robot : getRobotsByType(PrimaryLockerRobot.class)) {
+    public Bag pickUpBagByRobotType(Class<? extends Robot> clazz, Ticket ticket) {
+        Bag bag = null;
+        for (Robot robot : getRobotsByType(clazz)) {
             if (robot.isValidTicket(ticket)) {
-                return robot.pickUpBag(ticket);
+                bag = robot.pickUpBag(ticket);
+            }
+        }
+        return bag;
+    }
+
+    public Bag pickUpBag(Ticket ticket) {
+        Bag bag;
+        bag = pickUpBagByRobotType(PrimaryLockerRobot.class, ticket);
+        if (bag != null) {
+            return bag;
+        }
+        bag = pickUpBagByRobotType(SmartLockerRobot.class, ticket);
+        if (bag != null) {
+            return bag;
+        }
+        for (Locker locker : lockers) {
+            if (locker.isValidTicket(ticket)) {
+                return locker.pickUpBag(ticket);
             }
         }
         throw new InvalidTicketException();
