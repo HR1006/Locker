@@ -26,7 +26,7 @@ public class LockerRobotDirectorTest {
     }
 
     @Test
-    public void should_return_M_4_9_R_3_5_L_1_3_L_2_2_R_1_4_L_1_2_L_0_2_when_generate_report_given_one_manager_and_managed_two_robots_and_robot1_locker1_free_1_total_3_robot1_locker2_free_2_total_2and_robot2_locker1_free_1_total_2_robot2_locker2_free_0_total_2() {
+    public void should_return_M_4_9_R_3_5_L_1_3_L_2_2_R_1_4_L_1_2_L_0_2_when_generate_report_given_one_manager_and_managed_two_robots_and_robot1_locker1_free_1_total_3_robot1_locker2_free_2_total_2_and_robot2_locker1_free_1_total_2_robot2_locker2_free_0_total_2() {
         String result = "" +
                 "M\t4\t9\n" +
                 "\tR\t3\t5\n" +
@@ -56,6 +56,31 @@ public class LockerRobotDirectorTest {
         locker22.depositBag(new Bag());
         robot2.addLocker(locker22);
         manager.addStoreable(robot2);
+
+        director.addLockerRobotManager(manager);
+        String report = director.generateReport();
+        assertEquals(result, report);
+    }
+
+    @Test
+    public void should_return_M_3_5_R_1_3_L_1_3_L_2_2_when_generate_report_given_one_manager_and_one_locker_and_manager_managed_one_robots_and_robot_locker_free_1_total_3_and_manager_managed_locker_free_2_total_2() {
+        String result = "" +
+                "M\t3\t5\n" +
+                "\tR\t1\t3\n" +
+                "\t\tL\t1\t3\n" +
+                "\tL\t2\t2";
+        LockerRobotDirector director = new LockerRobotDirector();
+        LockerRobotManager manager = new LockerRobotManager();
+
+        Robot robot = new PrimaryLockerRobot();
+        Locker locker1 = new Locker(3);
+        locker1.depositBag(new Bag());
+        locker1.depositBag(new Bag());
+        robot.addLocker(locker1);
+        manager.addStoreable(robot);
+
+        Locker locker = new Locker(2);
+        manager.addStoreable(locker);
 
         director.addLockerRobotManager(manager);
         String report = director.generateReport();
