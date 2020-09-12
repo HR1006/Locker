@@ -87,4 +87,29 @@ public class LockerRobotDirectorTest {
         assertEquals(result, report);
     }
 
+    @Test
+    public void should_return_M_1_3_L_1_3_M_2_2_L_2_2_when_generate_report_given_two_manager_and_manager1_managed_one_locker_free_1_total_3_and_manager2_managed_one_locker_free_2_total_2() {
+        String result = "" +
+                "M\t1\t3\n" +
+                "\tL\t1\t3\n" +
+                "M\t2\t2\n" +
+                "\tL\t2\t2";
+        LockerRobotDirector director = new LockerRobotDirector();
+
+        LockerRobotManager manager1 = new LockerRobotManager();
+        Locker locker1 = new Locker(3);
+        locker1.depositBag(new Bag());
+        locker1.depositBag(new Bag());
+        manager1.addStoreable(locker1);
+        director.addLockerRobotManager(manager1);
+
+        LockerRobotManager manager2 = new LockerRobotManager();
+        Locker locker2 = new Locker(2);
+        manager2.addStoreable(locker2);
+        director.addLockerRobotManager(manager2);
+
+        String report = director.generateReport();
+        assertEquals(result, report);
+    }
+
 }
