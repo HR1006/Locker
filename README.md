@@ -56,3 +56,33 @@
 - Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，一张无效票据（包存在SmartLockerRobot管理的Locker里） When: LockerRobotManager取包 Then: 取包失败，提示非法票据
 - Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，一张有效票据（包存在LockerRobotManager管理的Locker里） When: LockerRobotManager取包 Then: 取包成功
 - Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，一张无效票据（包存在LockerRobotManager管理的Locker里） When: LockerRobotManager取包 Then: 取包失败，提示非法票据
+
+### LockerRobotDirector tasking
+-Given: LockerRobotDirector管理一个LockerRobotManager，且LockerRobotManager仅管理两个Locker，这两个Locker的可用容量和总容量分别为(1,3),(2,2) When: 生成报表 Then: 成功生成报表，报表内容为：
+> M 3 5
+> > L 1 3  
+> > L 2 2
+
+-Given: LockerRobotDirector管理一个LockerRobotManager，且LockerRobotManager仅管理两个Robot，这两个Robot分别管理两个Locker，这些Locker的可用容量和总容量分别为(1,3),(2,2),(1,2),(0,2) When: 生成报表 Then: 成功生成报表，报表内容为：
+> M 4 9
+> > R 3 5
+> > > L 1 3  
+> > > L 2 2
+>
+> > R 1 4
+> > > R 1 2  
+> > > R 0 2
+
+-Given: LockerRobotDirector管理一个LockerRobotManager，且LockerRobotManager管理一个Robot和一个Locker，这个Robot仅管理一个Locker，这个Locker的可用容量和总容量分别为(1,3)，LockerRobotManager直接管理的Locker可用容量和总容量分别为(2,2) When: 生成报表 Then: 成功生成报表，报表内容为：
+> M 3 5
+> > R 1 3
+> > > L 1 3
+>
+> > L 2 2
+
+-Given: LockerRobotDirector管理两个LockerRobotManager，且这两个LockerRobotManager都仅管理一个Locker，Locker的可用容量和总容量分别为(1,3),(2,2) When: 生成报表 Then: 成功生成报表，报表内容为：
+> M 1 3
+> > L 1 3
+
+> M 2 2
+> > L 2 2
