@@ -68,4 +68,21 @@ public class LockerRobotManager {
         }
         throw new InvalidTicketException();
     }
+
+    public int freeCapacity() {
+        return storeables.stream().mapToInt(Storeable::freeCapacity).sum();
+    }
+
+    public List<String> generateReport() {
+        List<String> report = new ArrayList<>();
+        report.add("M\t" + freeCapacity() + "\t" + totalCapacity());
+        storeables.stream().forEach(storeable -> storeable
+                .generateReport()
+                .forEach(storeableReport -> report.add("\t" + storeableReport)));
+        return report;
+    }
+
+    private int totalCapacity() {
+        return storeables.stream().mapToInt(Storeable::totalCapacity).sum();
+    }
 }

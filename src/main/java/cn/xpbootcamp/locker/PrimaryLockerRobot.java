@@ -1,5 +1,9 @@
 package cn.xpbootcamp.locker;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PrimaryLockerRobot extends Robot {
     @Override
     public Ticket depositBagOrNot(Bag bag) {

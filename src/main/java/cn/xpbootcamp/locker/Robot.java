@@ -2,6 +2,7 @@ package cn.xpbootcamp.locker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Robot implements Storeable {
     private final List<Locker> lockers = new ArrayList<>();
@@ -38,4 +39,26 @@ public abstract class Robot implements Storeable {
     }
 
     public abstract Ticket depositBagOrNot(Bag bag);
+
+    @Override
+    public List<String> generateReport() {
+        List<String> report = new ArrayList<>();
+        report.add("R\t" + freeCapacity() + "\t" + getLockers().size());
+        List<String> lockerReportList = getLockers()
+                .stream()
+                .map(locker -> "\t" + locker.generateReport())
+                .collect(Collectors.toList());
+        report.addAll(lockerReportList);
+        return report;
+    }
+
+    @Override
+    public int freeCapacity() {
+        return lockers.stream().mapToInt(Locker::freeCapacity).sum();
+    }
+
+    @Override
+    public int totalCapacity() {
+        return lockers.stream().mapToInt(Locker::totalCapacity).sum();
+    }
 }

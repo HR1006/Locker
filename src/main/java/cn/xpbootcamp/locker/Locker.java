@@ -1,6 +1,8 @@
 package cn.xpbootcamp.locker;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Locker implements Storeable {
@@ -17,7 +19,17 @@ public class Locker implements Storeable {
     }
 
     public int freeCapacity() {
-        return lockerCapacity -  mapping.size();
+        return totalCapacity() -  mapping.size();
+    }
+
+    @Override
+    public List<String> generateReport() {
+        return Collections.singletonList("L\t" + freeCapacity() + "\t" + totalCapacity());
+    }
+
+    @Override
+    public int totalCapacity() {
+        return lockerCapacity;
     }
 
     @Override
