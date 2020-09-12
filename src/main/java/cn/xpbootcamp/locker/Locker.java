@@ -3,7 +3,7 @@ package cn.xpbootcamp.locker;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Locker {
+public class Locker implements Storeable {
     private final int lockerCapacity;
     private final Map<Ticket, Bag> mapping = new HashMap<>();
 
@@ -11,6 +11,7 @@ public class Locker {
         this.lockerCapacity = lockerCapacity;
     }
 
+    @Override
     public boolean isValidTicket(Ticket ticket) {
         return mapping.containsKey(ticket);
     }
@@ -19,6 +20,7 @@ public class Locker {
         return lockerCapacity -  mapping.size();
     }
 
+    @Override
     public Ticket depositBag(Bag bag) {
         Ticket ticket = null;
         if (freeCapacity() == 0) {
@@ -30,6 +32,7 @@ public class Locker {
         return ticket;
     }
 
+    @Override
     public Bag pickUpBag(Ticket ticket) {
         Bag bag = mapping.remove(ticket);;
         if (bag == null) {

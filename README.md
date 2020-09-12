@@ -45,10 +45,10 @@
 - Given: 一张无效票据 When: SmartLockerRobot取包 Then: 取包失败，提示非法票据
 
 ### LockerRobotManager tasking
-- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且都未存满 When: LockerRobotManager存包 Then: 成功存包到PrimaryLockerRobot的第一个非空Locker，返回票据
-- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且只有PrimaryLockerRobot已存满 When: LockerRobotManager存包 Then: 成功存包到SmartLockerRobot剩余容量最大的Locker，返回票据
-- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且只有LockerRobotManager管理的两个Locker未存满 When: LockerRobotManager存包 Then: 成功存包到LockerRobotManager管理的第一个Locker，返回票据
-- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且只有LockerRobotManager管理的第二个Locker未存满 When: LockerRobotManager存包 Then: 成功存包到LockerRobotManager管理的第二个Locker，返回票据
+- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且都未存满 When: LockerRobotManager存包 Then: 存包成功，返回票据
+- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且只有PrimaryLockerRobot已存满 When: LockerRobotManager存包 Then: 存包成功，返回票据
+- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且只有LockerRobotManager管理的两个Locker未存满 When: LockerRobotManager存包 Then: 存包成功，返回票据
+- Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且只有LockerRobotManager管理的第二个Locker未存满 When: LockerRobotManager存包 Then: 存包成功，返回票据
 - Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，且都已经存满 When: LockerRobotManager存包 Then: 存包失败，提示储物柜已满
 - Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，一张有效票据（包存在PrimaryLockerRobot管理的Locker里） When: LockerRobotManager取包 Then: 取包成功
 - Given: LockerRobotManager管理一个PrimaryLockerRobot、一个SmartLockerRobot、两个Locker，一张无效票据（包存在PrimaryLockerRobot管理的Locker里） When: LockerRobotManager取包 Then: 取包失败，提示非法票据

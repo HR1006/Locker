@@ -3,7 +3,7 @@ package cn.xpbootcamp.locker;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Robot {
+public abstract class Robot implements Storeable {
     private final List<Locker> lockers = new ArrayList<>();
 
     public List<Locker> getLockers() {
@@ -14,8 +14,10 @@ public abstract class Robot {
         lockers.add(locker);
     }
 
+    @Override
     public abstract Ticket depositBag(Bag bag);
 
+    @Override
     public boolean isValidTicket(Ticket ticket) {
         for (Locker locker : getLockers()) {
             if (locker.isValidTicket(ticket)) {
@@ -25,6 +27,7 @@ public abstract class Robot {
         return false;
     }
 
+    @Override
     public Bag pickUpBag(Ticket ticket) {
         for (Locker locker : lockers) {
             if (locker.isValidTicket(ticket)) {
