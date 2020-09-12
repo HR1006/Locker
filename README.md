@@ -70,8 +70,8 @@
 > > > L 2 2
 >
 > > R 1 4
-> > > R 1 2  
-> > > R 0 2
+> > > L 1 2  
+> > > L 0 2
 
 -Given: LockerRobotDirector管理一个LockerRobotManager，且LockerRobotManager管理一个Robot和一个Locker，这个Robot仅管理一个Locker，这个Locker的可用容量和总容量分别为(1,3)，LockerRobotManager直接管理的Locker可用容量和总容量分别为(2,2) When: 生成报表 Then: 成功生成报表，报表内容为：
 > M 3 5

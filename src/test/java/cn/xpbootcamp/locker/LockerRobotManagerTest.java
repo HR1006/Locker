@@ -17,14 +17,14 @@ public class LockerRobotManagerTest {
         lockerRobotManager = new LockerRobotManager();
         primaryLockerRobot = new PrimaryLockerRobot();
         primaryLockerRobot.addLocker(new Locker(1));
-        lockerRobotManager.addRobot(primaryLockerRobot);
+        lockerRobotManager.addStoreable(primaryLockerRobot);
         smartLockerRobot = new SmartLockerRobot();
         smartLockerRobot.addLocker(new Locker(1));
-        lockerRobotManager.addRobot(smartLockerRobot);
+        lockerRobotManager.addStoreable(smartLockerRobot);
         locker1 = new Locker(1);
-        lockerRobotManager.addLocker(locker1);
+        lockerRobotManager.addStoreable(locker1);
         locker2 = new Locker(1);
-        lockerRobotManager.addLocker(locker2);
+        lockerRobotManager.addStoreable(locker2);
     }
 
     @Test

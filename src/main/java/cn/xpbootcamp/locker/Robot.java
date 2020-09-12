@@ -43,12 +43,10 @@ public abstract class Robot implements Storeable {
     @Override
     public List<String> generateReport() {
         List<String> report = new ArrayList<>();
-        report.add("R\t" + freeCapacity() + "\t" + getLockers().size());
-        List<String> lockerReportList = getLockers()
-                .stream()
-                .map(locker -> "\t" + locker.generateReport())
-                .collect(Collectors.toList());
-        report.addAll(lockerReportList);
+        report.add("R\t" + freeCapacity() + "\t" + totalCapacity());
+        getLockers().forEach(locker -> {
+            report.add("\t" + locker.generateReport().get(0));
+        });
         return report;
     }
 

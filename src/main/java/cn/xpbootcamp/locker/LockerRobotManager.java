@@ -7,12 +7,8 @@ import java.util.stream.Collectors;
 public class LockerRobotManager {
     private final List<Storeable> storeables = new ArrayList<>();
 
-    public void addRobot(Robot robot) {
-        storeables.add(robot);
-    }
-
-    public void addLocker(Locker locker) {
-        storeables.add(locker);
+    public void addStoreable(Storeable storeable) {
+        storeables.add(storeable);
     }
 
     public Ticket depositBagByToRobot(Bag bag) {
